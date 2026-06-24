@@ -5,17 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chain Reactions & Grammar: Creating a Better Life</title>
     
+    <!-- Preload image to make it load directly when opening the page -->
     <link rel="preload" href="Gemini_Generated_Image_ws99xws99xws99xw.png" as="image">
 
-    <style>
-        :root {
-            --brand-color: #202065;
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chain Reactions & Grammar: Creating a Better Life</title>
     <style>
         :root {
             --brand-color: #202065;
@@ -101,7 +93,7 @@
             background-color: #e55a5a;
         }
 
-        input[type="text"], select {
+        input[type="text"], select, textarea {
             padding: 8px;
             border: 2px solid #ccc;
             border-radius: 4px;
@@ -110,7 +102,7 @@
             outline: none;
         }
 
-        input[type="text"]:focus, select:focus {
+        input[type="text"]:focus, select:focus, textarea:focus {
             border-color: var(--brand-color);
         }
 
@@ -189,7 +181,7 @@
         .drop-zone {
             min-height: 48px;
             background-color: white;
-            border: 2px solid var(--brand-color);
+            border: 2px solid #ccc;
             border-radius: 8px;
             padding: 12px;
             display: flex;
@@ -215,7 +207,6 @@
             transform: scale(0.95);
         }
 
-        /* "Soft" style when dropped into the drop-zone */
         .drag-word.soft {
             background-color: var(--brand-light);
             color: var(--brand-color);
@@ -248,7 +239,6 @@
         <h2>Exercise 1: Vocabulary Matching</h2>
         <p>Match the correct letter from the definition list to the vocabulary word.</p>
         
-        <!-- Inserted Image -->
         <img src="Gemini_Generated_Image_ws99xws99xws99xw.png" alt="Vocabulary Illustrations" class="vocab-image">
 
         <div class="flex-container">
@@ -476,13 +466,16 @@
         <h2>Exercise 6: Build a Sentence</h2>
         <p>Complete the sentence starters about Amina and Zayn. You <strong>must</strong> use the grammar rule (Infinitive of Purpose) where appropriate, and logically use the bolded vocabulary words.</p>
         
-        <div class="chain-sentence">1. <strong>To feel</strong> more <strong>peaceful</strong>, Amina <input type="text" class="long-input"></div>
-        <div class="chain-sentence">2. Zayn wanted to <strong>protect</strong> his time <strong>to</strong> <input type="text" class="long-input"></div>
-        <div class="chain-sentence">3. <strong>To keep</strong> her mind <strong>focused</strong>, she <input type="text" class="long-input"></div>
-        <div class="chain-sentence">4. Amina made it a <strong>priority</strong> <strong>to</strong> <input type="text" class="long-input"></div>
-        <div class="chain-sentence">5. <strong>To nurture</strong> her <strong>spiritual</strong> life, she <input type="text" class="long-input"></div>
+        <div class="chain-sentence">1. <strong>To feel</strong> more <strong>peaceful</strong>, Amina <input type="text" class="long-input ex6-input"></div>
+        <div class="chain-sentence">2. Zayn wanted to <strong>protect</strong> his time <strong>to</strong> <input type="text" class="long-input ex6-input"></div>
+        <div class="chain-sentence">3. <strong>To keep</strong> her mind <strong>focused</strong>, she <input type="text" class="long-input ex6-input"></div>
+        <div class="chain-sentence">4. Amina made it a <strong>priority</strong> <strong>to</strong> <input type="text" class="long-input ex6-input"></div>
+        <div class="chain-sentence">5. <strong>To nurture</strong> her <strong>spiritual</strong> life, she <input type="text" class="long-input ex6-input"></div>
 
-        <button class="show-btn" style="margin-top: 15px;" onclick="toggleFeedback('feed6')">Show Suggestions & Tips</button>
+        <div class="btn-group">
+            <button onclick="checkOpenWrittenAnswers('ex6-input')">Check Answers</button>
+            <button class="show-btn" onclick="toggleFeedback('feed6')">Show Suggestions & Tips</button>
+        </div>
         <div class="feedback-info" id="feed6">
             <strong>Tips:</strong> Ensure your additions logically finish the thought. <br>
             <em>Examples:</em><br>
@@ -504,7 +497,7 @@
         </div>
         <div class="dialogue-line">
             <span class="dialogue-speaker">Me:</span> 
-            <input type="text" class="long-input" placeholder="React to 'prioritize'...">
+            <input type="text" class="long-input ex7-input" placeholder="React to 'prioritize'...">
         </div>
         
         <div class="dialogue-line">
@@ -512,7 +505,7 @@
         </div>
         <div class="dialogue-line">
             <span class="dialogue-speaker">Me:</span> 
-            <input type="text" class="long-input" placeholder="React to 'balanced'...">
+            <input type="text" class="long-input ex7-input" placeholder="React to 'balanced'...">
         </div>
 
         <div class="dialogue-line">
@@ -520,10 +513,13 @@
         </div>
         <div class="dialogue-line">
             <span class="dialogue-speaker">Me:</span> 
-            <input type="text" class="long-input" placeholder="React to 'inner'...">
+            <input type="text" class="long-input ex7-input" placeholder="React to 'inner'...">
         </div>
 
-        <button class="show-btn" style="margin-top: 15px;" onclick="toggleFeedback('feed7')">Show Suggestions & Tips</button>
+        <div class="btn-group">
+            <button onclick="checkOpenWrittenAnswers('ex7-input')">Check Answers</button>
+            <button class="show-btn" onclick="toggleFeedback('feed7')">Show Suggestions & Tips</button>
+        </div>
         <div class="feedback-info" id="feed7">
             <strong>Tips:</strong> A good response acknowledges your internal thought and builds on it honestly. <br>
             <em>Example 1:</em> "You're right, I need to prioritize it, but I always convince myself I don't have enough time!"<br>
@@ -544,9 +540,12 @@
         </ul>
         </p>
         
-        <textarea style="width: 100%; height: 200px; border: 2px solid #ccc; border-radius: 4px; padding: 10px; font-family: inherit; resize: vertical;"></textarea>
+        <textarea id="ex8-textarea" style="width: 100%; height: 200px; padding: 10px; font-family: inherit; resize: vertical; box-sizing: border-box;"></textarea>
 
-        <button class="show-btn" style="margin-top: 15px;" onclick="toggleFeedback('feed8')">Show Suggestions & Tips</button>
+        <div class="btn-group">
+            <button onclick="checkTextareaAnswer('ex8-textarea')">Check Answers</button>
+            <button class="show-btn" onclick="toggleFeedback('feed8')">Show Suggestions & Tips</button>
+        </div>
         <div class="feedback-info" id="feed8">
             <strong>Tips:</strong> Plan your links before you write! <br>
             <em>Example Start:</em> "I wanted to feel <strong>peaceful</strong>, so I decided to sit in the park <strong>to read</strong> my favorite book. Reading my favorite book helped me <strong>to reflect</strong> on my day and discover my <strong>inner</strong> calm..."
@@ -572,7 +571,6 @@
 
             let dropContainer = targetElement;
             
-            // Handle case if dropping directly onto another word
             if (dropContainer.classList.contains('drag-word')) {
                 let parent = dropContainer.parentElement;
                 parent.insertBefore(draggedElement, dropContainer);
@@ -581,7 +579,6 @@
                 dropContainer.appendChild(draggedElement);
             }
 
-            // Apply 'soft' styling if dropped in the drop-zone
             if (dropContainer.classList.contains('drop-zone')) {
                 draggedElement.classList.add('soft');
             } else if (dropContainer.classList.contains('word-bank')) {
@@ -589,22 +586,16 @@
             }
         }
 
-        // Check Drag and Drop Sentence Builder
+        // Check Drag and Drop Sentence Builder (Ex 2)
         function checkSentenceBuilder() {
             const containers = document.querySelectorAll('.builder-container');
             containers.forEach(container => {
                 const answer = container.getAttribute('data-answer').toLowerCase();
                 const dropZone = container.querySelector('.drop-zone');
-                
-                // Get words from the drop zone in order
-                const words = Array.from(dropZone.querySelectorAll('.drag-word'))
-                                   .map(w => w.innerText.trim());
-                
+                const words = Array.from(dropZone.querySelectorAll('.drag-word')).map(w => w.innerText.trim());
                 const userAnswer = words.join(' ').toLowerCase();
 
                 dropZone.classList.remove('correct', 'incorrect');
-                
-                // Only validate if user has dropped at least one word
                 if (words.length > 0) {
                     if (userAnswer === answer) {
                         dropZone.classList.add('correct');
@@ -615,16 +606,14 @@
             });
         }
 
-        // Show Drag and Drop Sentence Builder Answers
+        // Show Drag and Drop Sentence Builder Answers (Ex 2)
         function showSentenceBuilder() {
             const containers = document.querySelectorAll('.builder-container');
             containers.forEach(container => {
                 const answerText = container.getAttribute('data-answer');
                 const dropZone = container.querySelector('.drop-zone');
-                
                 const answerWords = answerText.split(' ');
                 
-                // Reorder blocks into drop zone based on answer
                 answerWords.forEach(ansWord => {
                     const allWords = Array.from(container.querySelectorAll('.drag-word'));
                     const match = allWords.find(w => w.innerText.toLowerCase() === ansWord.toLowerCase());
@@ -633,7 +622,6 @@
                         match.classList.add('soft');
                     }
                 });
-                
                 dropZone.classList.remove('incorrect');
                 dropZone.classList.add('correct');
             });
@@ -655,7 +643,7 @@
             });
         }
 
-        // Show Answers for Select Dropdowns
+        // Show Answers for Select Dropdowns (Ex 1, Ex 5)
         function showAnswers(className) {
             const selects = document.querySelectorAll('.' + className);
             selects.forEach(select => {
@@ -681,7 +669,7 @@
             });
         }
 
-        // Show Text Answers
+        // Show Text Answers (Ex 3, Ex 4)
         function showTextAnswers(className) {
             const inputs = document.querySelectorAll('.' + className);
             inputs.forEach(input => {
@@ -690,6 +678,30 @@
                 input.classList.remove('incorrect');
                 input.classList.add('correct');
             });
+        }
+
+        // Check Open-Ended Written Inputs (Ex 6, Ex 7) - Validates presence of content
+        function checkOpenWrittenAnswers(className) {
+            const inputs = document.querySelectorAll('.' + className);
+            inputs.forEach(input => {
+                input.classList.remove('correct', 'incorrect');
+                if (input.value.trim().length >= 5) {
+                    input.classList.add('correct');
+                } else if (input.value.trim() !== "") {
+                    input.classList.add('incorrect');
+                }
+            });
+        }
+
+        // Check Textarea Input (Ex 8) - Validates baseline length constraint met
+        function checkTextareaAnswer(id) {
+            const textarea = document.getElementById(id);
+            textarea.classList.remove('correct', 'incorrect');
+            if (textarea.value.trim().length >= 40) {
+                textarea.classList.add('correct');
+            } else if (textarea.value.trim() !== "") {
+                textarea.classList.add('incorrect');
+            }
         }
 
         // Toggle Feedback Info Divs
