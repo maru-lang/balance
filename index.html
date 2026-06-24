@@ -215,10 +215,11 @@
             font-weight: normal;
         }
 
-        .vocab-image {
+ .vocab-image {
             display: block;
-            max-width: 100%;
-            width: 450px;
+            width: 100%; /* Tells it to shrink on small mobile screens */
+            max-width: 450px; /* Stops it from getting too huge on desktops */
+            height: auto; /* Keeps the image proportions perfect so it doesn't stretch */
             margin: 0 auto 25px auto;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
