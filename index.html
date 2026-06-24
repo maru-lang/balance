@@ -152,52 +152,64 @@
         .dialogue-line { margin-bottom: 15px; }
         .dialogue-speaker { font-weight: bold; color: var(--brand-color); }
 
-        /* Drag and Drop Styles */
-        .dnd-container { margin-bottom: 25px; }
-        .word-bank { 
-            min-height: 50px; 
-            padding: 10px; 
-            background: #f0f0f5; 
-            border-radius: 4px; 
-            display: flex; 
-            gap: 10px; 
-            flex-wrap: wrap; 
-            margin-bottom: 10px; 
-            border: 2px dashed #ccc; 
-            align-items: center;
+        /* Drag and Drop Sentence Builder Styles */
+        .builder-container {
+            margin-bottom: 25px;
+            background-color: #fcfcfc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #eee;
         }
-        .drop-zone { 
-            min-height: 50px; 
-            padding: 10px; 
-            background: #fff; 
-            border-radius: 4px; 
-            display: flex; 
-            gap: 10px; 
-            flex-wrap: wrap; 
-            border: 2px dashed var(--brand-color); 
-            align-items: center; 
-            transition: all 0.3s;
+
+        .word-bank {
+            min-height: 45px;
+            background-color: var(--brand-light);
+            border: 2px dashed #a0a0c0;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            transition: background-color 0.3s;
         }
-        .draggable-word { 
-            padding: 6px 14px; 
-            background: white; 
-            border: 1px solid var(--brand-color); 
-            border-radius: 20px; 
-            cursor: grab; 
-            font-weight: bold; 
-            color: var(--brand-color); 
+
+        .drop-zone {
+            min-height: 48px;
+            background-color: white;
+            border: 2px solid var(--brand-color);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .drag-word {
+            background-color: var(--brand-color);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: grab;
+            font-weight: bold;
             user-select: none;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
         }
-        .draggable-word:active { cursor: grabbing; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transform: translateY(1px); }
-        .fixed-word { 
-            padding: 6px 14px; 
-            font-weight: bold; 
-            color: #fff; 
-            background: var(--brand-color); 
-            border-radius: 20px; 
-            user-select: none; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        .drag-word:active {
+            cursor: grabbing;
+            transform: scale(0.95);
+        }
+
+        /* "Soft" style when dropped into the drop-zone */
+        .drag-word.soft {
+            background-color: var(--brand-light);
+            color: var(--brand-color);
+            border: 1px solid var(--brand-color);
+            box-shadow: none;
+            font-weight: normal;
         }
 
     </style>
@@ -249,81 +261,76 @@
         </div>
     </div>
 
-    <!-- EXERCISE 2: Word Sentence Builder (Drag & Drop) -->
+    <!-- EXERCISE 2: Drag and Drop Word Sentence Builder -->
     <div class="exercise-card" id="ex2">
         <h2>Exercise 2: Word Sentence Builder</h2>
-        <p>Drag and drop the words from the grey Word Bank into the empty box below it to complete the sentence. The starting word is already fixed in place for you!</p>
+        <p>Drag and drop the words from the <strong>Word Bank</strong> into the <strong>Drop Zone</strong> to build simple sentences related to our theme. Ensure you begin with the "Start with" word provided!</p>
         
-        <!-- Sentence 1 -->
-        <div class="dnd-container">
-            <div class="word-bank" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s1-w1">mind</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s1-w2">peaceful</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s1-w3">a</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s1-w4">creates</span>
+        <div class="builder-container" data-answer="prioritization creates a peaceful mind">
+            <strong>Start with:</strong> Prioritization
+            <div class="word-bank" ondragover="allowDrop(event)" ondrop="drop(event, this)">
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w1_1">mind</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w1_2">peaceful</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w1_3">a</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w1_4">Prioritization</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w1_5">creates</span>
             </div>
-            <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" data-answer="creates a peaceful mind">
-                <span class="fixed-word">Prioritization</span>
-            </div>
+            <div class="drop-zone" ondragover="allowDrop(event)" ondrop="drop(event, this)"></div>
         </div>
 
-        <!-- Sentence 2 -->
-        <div class="dnd-container">
-            <div class="word-bank" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s2-w1">peace</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s2-w2">my</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s2-w3">top</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s2-w4">is</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s2-w5">priority</span>
+        <div class="builder-container" data-answer="inner peace is my top priority">
+            <strong>Start with:</strong> Inner
+            <div class="word-bank" ondragover="allowDrop(event)" ondrop="drop(event, this)">
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w2_1">peace</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w2_2">my</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w2_3">top</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w2_4">is</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w2_5">priority</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w2_6">Inner</span>
             </div>
-            <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" data-answer="peace is my top priority">
-                <span class="fixed-word">Inner</span>
-            </div>
+            <div class="drop-zone" ondragover="allowDrop(event)" ondrop="drop(event, this)"></div>
         </div>
 
-        <!-- Sentence 3 -->
-        <div class="dnd-container">
-            <div class="word-bank" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s3-w1">to</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s3-w2">stay</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s3-w3">choose</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s3-w4">focused</span>
+        <div class="builder-container" data-answer="i choose to stay focused">
+            <strong>Start with:</strong> I
+            <div class="word-bank" ondragover="allowDrop(event)" ondrop="drop(event, this)">
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w3_1">I</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w3_2">to</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w3_3">stay</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w3_4">choose</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w3_5">focused</span>
             </div>
-            <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" data-answer="choose to stay focused">
-                <span class="fixed-word">I</span>
-            </div>
+            <div class="drop-zone" ondragover="allowDrop(event)" ondrop="drop(event, this)"></div>
         </div>
 
-        <!-- Sentence 4 -->
-        <div class="dnd-container">
-            <div class="word-bank" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s4-w1">protect</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s4-w2">time</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s4-w3">must</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s4-w4">my</span>
+        <div class="builder-container" data-answer="i must protect my time">
+            <strong>Start with:</strong> I
+            <div class="word-bank" ondragover="allowDrop(event)" ondrop="drop(event, this)">
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w4_1">time</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w4_2">protect</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w4_3">must</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w4_4">my</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w4_5">I</span>
             </div>
-            <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" data-answer="must protect my time">
-                <span class="fixed-word">I</span>
-            </div>
+            <div class="drop-zone" ondragover="allowDrop(event)" ondrop="drop(event, this)"></div>
         </div>
 
-        <!-- Sentence 5 -->
-        <div class="dnd-container">
-            <div class="word-bank" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s5-w1">makes</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s5-w2">life</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s5-w3">happy</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s5-w4">balanced</span>
-                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="s5-w5">me</span>
+        <div class="builder-container" data-answer="a balanced life makes me happy">
+            <strong>Start with:</strong> A
+            <div class="word-bank" ondragover="allowDrop(event)" ondrop="drop(event, this)">
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w5_1">life</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w5_2">A</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w5_3">makes</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w5_4">me</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w5_5">happy</span>
+                <span class="drag-word" draggable="true" ondragstart="drag(event)" id="w5_6">balanced</span>
             </div>
-            <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" data-answer="balanced life makes me happy">
-                <span class="fixed-word">A</span>
-            </div>
+            <div class="drop-zone" ondragover="allowDrop(event)" ondrop="drop(event, this)"></div>
         </div>
 
         <div class="btn-group">
-            <button onclick="checkSentenceBuilderDnD()">Check Answers</button>
-            <button class="show-btn" onclick="showSentenceBuilderDnD()">Show Answers</button>
+            <button onclick="checkSentenceBuilder()">Check Answers</button>
+            <button class="show-btn" onclick="showSentenceBuilder()">Show Answers</button>
         </div>
     </div>
 
@@ -521,71 +528,83 @@
     </div>
 
     <script>
-        // Drag and Drop Logic
+        // --- Drag and Drop Functions for Exercise 2 ---
         function allowDrop(ev) {
             ev.preventDefault();
         }
 
         function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
+            ev.dataTransfer.setData("text/plain", ev.target.id);
         }
 
-        function drop(ev) {
+        function drop(ev, targetElement) {
             ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
+            var data = ev.dataTransfer.getData("text/plain");
             var draggedElement = document.getElementById(data);
+
+            if (!draggedElement) return;
+
+            let dropContainer = targetElement;
             
-            let target = ev.target;
-            
-            // Allow reordering: Insert before the hovered draggable word
-            if(target.classList.contains('draggable-word')) {
-                target.parentNode.insertBefore(draggedElement, target);
-            } 
-            // If dropping on the fixed starting word, put the dragged element directly after it
-            else if(target.classList.contains('fixed-word')) {
-                target.parentNode.insertBefore(draggedElement, target.nextSibling);
+            // Handle case if dropping directly onto another word
+            if (dropContainer.classList.contains('drag-word')) {
+                let parent = dropContainer.parentElement;
+                parent.insertBefore(draggedElement, dropContainer);
+                dropContainer = parent;
+            } else if (dropContainer.classList.contains('word-bank') || dropContainer.classList.contains('drop-zone')) {
+                dropContainer.appendChild(draggedElement);
             }
-            // Append to container if dropped in an empty space of the drop-zone or word-bank
-            else if (target.classList.contains('drop-zone') || target.classList.contains('word-bank')) {
-                target.appendChild(draggedElement);
+
+            // Apply 'soft' styling if dropped in the drop-zone
+            if (dropContainer.classList.contains('drop-zone')) {
+                draggedElement.classList.add('soft');
+            } else if (dropContainer.classList.contains('word-bank')) {
+                draggedElement.classList.remove('soft');
             }
         }
 
-        // Check Drag & Drop Sentence Builder
-        function checkSentenceBuilderDnD() {
-            const containers = document.querySelectorAll('.dnd-container');
+        // Check Drag and Drop Sentence Builder
+        function checkSentenceBuilder() {
+            const containers = document.querySelectorAll('.builder-container');
             containers.forEach(container => {
+                const answer = container.getAttribute('data-answer').toLowerCase();
                 const dropZone = container.querySelector('.drop-zone');
-                const correctAnswer = dropZone.getAttribute('data-answer');
                 
-                // Extract text from only the draggable words in the drop zone
-                const words = Array.from(dropZone.querySelectorAll('.draggable-word')).map(el => el.textContent.trim());
-                const userAnswer = words.join(' ');
+                // Get words from the drop zone in order
+                const words = Array.from(dropZone.querySelectorAll('.drag-word'))
+                                   .map(w => w.innerText.trim());
                 
+                const userAnswer = words.join(' ').toLowerCase();
+
                 dropZone.classList.remove('correct', 'incorrect');
                 
-                if (userAnswer === correctAnswer) {
-                    dropZone.classList.add('correct');
-                } else if (words.length > 0) {
-                    dropZone.classList.add('incorrect');
+                // Only validate if user has dropped at least one word
+                if (words.length > 0) {
+                    if (userAnswer === answer) {
+                        dropZone.classList.add('correct');
+                    } else {
+                        dropZone.classList.add('incorrect');
+                    }
                 }
             });
         }
 
-        // Show Drag & Drop Answers
-        function showSentenceBuilderDnD() {
-            const containers = document.querySelectorAll('.dnd-container');
+        // Show Drag and Drop Sentence Builder Answers
+        function showSentenceBuilder() {
+            const containers = document.querySelectorAll('.builder-container');
             containers.forEach(container => {
+                const answerText = container.getAttribute('data-answer');
                 const dropZone = container.querySelector('.drop-zone');
-                const correctAnswer = dropZone.getAttribute('data-answer');
-                const correctWords = correctAnswer.split(' ');
                 
-                // Move correct words in order to the drop zone
-                correctWords.forEach(word => {
-                    const allSpans = Array.from(container.querySelectorAll('.draggable-word'));
-                    const spanToMove = allSpans.find(span => span.textContent === word);
-                    if(spanToMove) {
-                        dropZone.appendChild(spanToMove);
+                const answerWords = answerText.split(' ');
+                
+                // Reorder blocks into drop zone based on answer
+                answerWords.forEach(ansWord => {
+                    const allWords = Array.from(container.querySelectorAll('.drag-word'));
+                    const match = allWords.find(w => w.innerText.toLowerCase() === ansWord.toLowerCase());
+                    if (match) {
+                        dropZone.appendChild(match);
+                        match.classList.add('soft');
                     }
                 });
                 
@@ -593,6 +612,8 @@
                 dropZone.classList.add('correct');
             });
         }
+
+        // --- Standard Input Checking Functions ---
 
         // Check Select Dropdowns (Ex 1, Ex 5)
         function checkAnswers(className) {
