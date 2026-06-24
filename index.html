@@ -152,6 +152,63 @@
         .dialogue-line { margin-bottom: 15px; }
         .dialogue-speaker { font-weight: bold; color: var(--brand-color); }
 
+        /* Drag and Drop Styles */
+        .dnd-container {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .word-bank {
+            min-height: 45px;
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .drop-zone {
+            min-height: 45px;
+            border: 2px dashed #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: white;
+            align-items: center;
+            transition: border-color 0.3s;
+        }
+
+        .draggable-word {
+            background: var(--brand-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: grab;
+            user-select: none;
+            font-weight: 500;
+        }
+
+        .draggable-word:active {
+            cursor: grabbing;
+            opacity: 0.8;
+        }
+
+        .correct-zone {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-border) !important;
+        }
+
+        .incorrect-zone {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-border) !important;
+        }
+
     </style>
 </head>
 <body>
@@ -201,35 +258,71 @@
         </div>
     </div>
 
-    <!-- EXERCISE 2: Word Sentence Builder -->
+    <!-- EXERCISE 2: Drag and Drop Word Builder -->
     <div class="exercise-card" id="ex2">
         <h2>Exercise 2: Word Sentence Builder</h2>
-        <p>Unscramble the words below to build simple sentences related to our theme. Complete the sentence directly in the box using the starting word provided.</p>
+        <p>Drag and drop the words from the grey box into the dashed box to build correct sentences related to our theme.</p>
         
-        <div class="chain-sentence">
-            <em>mind / peaceful / a / prioritization / creates</em><br>
-            <input type="text" class="long-input ex2-text" data-answer="prioritization creates a peaceful mind" value="Prioritization ">
+        <div class="dnd-container">
+            <div class="word-bank" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w1-1">mind</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w1-2">peaceful</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w1-3">a</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w1-4">Prioritization</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w1-5">creates</span>
+            </div>
+            <div class="drop-zone ex2-drop" data-answer="prioritization creates a peaceful mind" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         </div>
-        <div class="chain-sentence">
-            <em>peace / my / top / is / priority / inner</em><br>
-            <input type="text" class="long-input ex2-text" data-answer="inner peace is my top priority" value="Inner ">
+
+        <div class="dnd-container">
+            <div class="word-bank" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w2-1">peace</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w2-2">my</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w2-3">top</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w2-4">is</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w2-5">priority</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w2-6">Inner</span>
+            </div>
+            <div class="drop-zone ex2-drop" data-answer="inner peace is my top priority" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         </div>
-        <div class="chain-sentence">
-            <em>I / to / stay / choose / focused</em><br>
-            <input type="text" class="long-input ex2-text" data-answer="i choose to stay focused" value="I ">
+
+        <div class="dnd-container">
+            <div class="word-bank" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w3-1">I</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w3-2">to</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w3-3">stay</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w3-4">choose</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w3-5">focused</span>
+            </div>
+            <div class="drop-zone ex2-drop" data-answer="i choose to stay focused" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         </div>
-        <div class="chain-sentence">
-            <em>time / protect / must / my / I</em><br>
-            <input type="text" class="long-input ex2-text" data-answer="i must protect my time" value="I ">
+
+        <div class="dnd-container">
+            <div class="word-bank" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w4-1">time</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w4-2">protect</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w4-3">must</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w4-4">my</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w4-5">I</span>
+            </div>
+            <div class="drop-zone ex2-drop" data-answer="i must protect my time" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         </div>
-        <div class="chain-sentence">
-            <em>life / a / makes / me / happy / balanced</em><br>
-            <input type="text" class="long-input ex2-text" data-answer="a balanced life makes me happy" value="A ">
+
+        <div class="dnd-container">
+            <div class="word-bank" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w5-1">life</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w5-2">A</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w5-3">makes</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w5-4">me</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w5-5">happy</span>
+                <span class="draggable-word" draggable="true" ondragstart="drag(event)" id="w5-6">balanced</span>
+            </div>
+            <div class="drop-zone ex2-drop" data-answer="a balanced life makes me happy" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         </div>
 
         <div class="btn-group">
-            <button onclick="checkSentenceBuilder('ex2-text')">Check Answers</button>
-            <button class="show-btn" onclick="showSentenceBuilder('ex2-text')">Show Answers</button>
+            <button onclick="checkDragAndDrop('ex2-drop')">Check Answers</button>
+            <button class="show-btn" onclick="showDragAndDrop('ex2-drop')">Show Answers</button>
         </div>
     </div>
 
@@ -427,7 +520,77 @@
     </div>
 
     <script>
-        // Check Select Dropdowns (Ex 1, Ex 5)
+        // DRAG AND DROP FUNCTIONS
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            var draggedElement = document.getElementById(data);
+            var target = ev.target;
+            
+            // If dropping onto another word, place it next to that word
+            if (target.classList.contains('draggable-word')) {
+                target.parentNode.insertBefore(draggedElement, target.nextSibling);
+            } 
+            // If dropping into the drop-zone or word-bank
+            else if (target.classList.contains('drop-zone') || target.classList.contains('word-bank')) {
+                target.appendChild(draggedElement);
+            }
+        }
+
+        function checkDragAndDrop(className) {
+            const dropZones = document.querySelectorAll('.' + className);
+            dropZones.forEach(zone => {
+                const answer = zone.getAttribute('data-answer').toLowerCase();
+                // Get the text content of all words placed inside this drop zone
+                const words = Array.from(zone.querySelectorAll('.draggable-word')).map(w => w.textContent.trim());
+                const userAnswer = words.join(' ').toLowerCase();
+                
+                zone.classList.remove('correct-zone', 'incorrect-zone');
+                
+                if (userAnswer === answer) {
+                    zone.classList.add('correct-zone');
+                } else if (words.length > 0) {
+                    zone.classList.add('incorrect-zone');
+                }
+            });
+        }
+
+        function showDragAndDrop(className) {
+            const dropZones = document.querySelectorAll('.' + className);
+            dropZones.forEach(zone => {
+                const answer = zone.getAttribute('data-answer');
+                const answerWords = answer.split(' ');
+                
+                // Find parent container to locate all words associated with this sentence
+                const parentContainer = zone.parentElement;
+                const allWords = Array.from(parentContainer.querySelectorAll('.draggable-word'));
+                
+                // Clear out the zone
+                zone.innerHTML = '';
+                
+                // Append spans in correct order
+                answerWords.forEach(ansWord => {
+                    const wordSpan = allWords.find(w => w.textContent.toLowerCase() === ansWord.toLowerCase());
+                    if(wordSpan) {
+                        zone.appendChild(wordSpan);
+                    }
+                });
+                
+                zone.classList.remove('incorrect-zone');
+                zone.classList.add('correct-zone');
+            });
+        }
+
+
+        // STANDARD FORM CHECK FUNCTIONS
         function checkAnswers(className) {
             const selects = document.querySelectorAll('.' + className);
             selects.forEach(select => {
@@ -441,7 +604,6 @@
             });
         }
 
-        // Show Answers for Select Dropdowns
         function showAnswers(className) {
             const selects = document.querySelectorAll('.' + className);
             selects.forEach(select => {
@@ -451,7 +613,6 @@
             });
         }
 
-        // Check Text Inputs (Ex 3, Ex 4)
         function checkTextAnswers(className) {
             const inputs = document.querySelectorAll('.' + className);
             inputs.forEach(input => {
@@ -467,39 +628,10 @@
             });
         }
 
-        // Show Text Answers
         function showTextAnswers(className) {
             const inputs = document.querySelectorAll('.' + className);
             inputs.forEach(input => {
                 let ans = input.getAttribute('data-answer');
-                input.value = ans;
-                input.classList.remove('incorrect');
-                input.classList.add('correct');
-            });
-        }
-
-        // Check Sentence Builder (Ex 2) - Removes punctuation for checking
-        function checkSentenceBuilder(className) {
-            const inputs = document.querySelectorAll('.' + className);
-            inputs.forEach(input => {
-                const answer = input.getAttribute('data-answer').toLowerCase();
-                const userAnswer = input.value.trim().toLowerCase().replace(/[.,]/g, '');
-                input.classList.remove('correct', 'incorrect');
-                
-                if (userAnswer === answer) {
-                    input.classList.add('correct');
-                } else if (userAnswer !== "") {
-                    input.classList.add('incorrect');
-                }
-            });
-        }
-
-        // Show Sentence Builder Answers (Ex 2) - Capitalizes first letter and adds period
-        function showSentenceBuilder(className) {
-            const inputs = document.querySelectorAll('.' + className);
-            inputs.forEach(input => {
-                let ans = input.getAttribute('data-answer');
-                ans = ans.charAt(0).toUpperCase() + ans.slice(1) + ".";
                 input.value = ans;
                 input.classList.remove('incorrect');
                 input.classList.add('correct');
